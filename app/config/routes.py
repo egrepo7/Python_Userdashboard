@@ -1,0 +1,25 @@
+from system.core.router import routes
+
+routes['default_controller'] = 'Dashboards'
+routes['/profile/<id>'] = 'Dashboards#user_profile'
+routes['/signin'] = 'Dashboards#signin_page'
+routes['/registerpage'] = 'Dashboards#register_page'
+routes['/signout'] = 'Dashboards#signout'
+routes['/deleteuser/<id>'] = 'Dashboards#delete_user'
+routes['/adminedit/<id>'] = 'Dashboards#admin_edit_page'
+routes['/viewadminpage'] = 'Dashboards#view_admin_page'
+routes['/addnew'] = 'Dashboards#add_user'
+routes['/viewusers'] = 'Dashboards#view_users'
+routes['/wall/<id>'] = 'Dashboards#show_wall'
+
+
+routes['POST']['/admin_updateinfo/<id>'] = 'Dashboards#admin_update_user'
+routes['POST']['/admin_updatepassword/<id>'] = 'Dashboards#admin_update_password'
+routes['POST']['/registeruser'] = 'Dashboards#register_user'
+routes['POST']['/signinuser'] = 'Dashboards#signin_user'
+routes['POST']['/adminreg'] = 'Dashboards#admin_newuser'
+routes['POST']['/profileinfo/<id>'] = 'Dashboards#update_profileinfo'
+routes['POST']['/profilepass/<id>'] = 'Dashboards#update_profilepass'
+routes['POST']['/profiledesc/<id>'] = 'Dashboards#update_profiledesc'
+routes['POST']['/sendmessage/<id>'] = 'Dashboards#send_message'
+routes['POST']['/sendcomment/<id>'] = 'Dashboards#send_comment'

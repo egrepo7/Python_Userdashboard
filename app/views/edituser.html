@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+  <title>Parallax Template - Materialize</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="/static/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="/static/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+  <nav class="white" role="navigation">
+	<div class="nav-wrapper container">
+	  <a id="logo-container" href="/viewusers" class="brand-logo">Northwest Dojo</a>
+	  <ul class="right hide-on-med-and-down">
+	  	<li><a href="/viewusers">Dashboard</a></li>
+		<li><a href="/signout">Sign Out</a></li>
+	  </ul>
+
+	  <ul id="nav-mobile" class="side-nav">
+		<li><a href="#">Navbar Link</a></li>
+	  </ul>
+	  <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+	</div>
+  </nav>
+	<div class="container row">
+		<div class="section"></div>
+		<h5>Edit Profile</h5>
+		<fieldset class="col s3">
+			<legend>Edit Information</legend>			
+			<form action="/profileinfo/{{ session['logged_user']['id'] }}" method="POST">
+					<label>Email:</label>
+						<input type="text" name='email' placeholder="Email">
+					<label>First Name:</label>
+						<input type="text" name='first_name' placeholder="First Name">
+					<label>Last Name:</label>
+						<input type="text" name='last_name' placeholder='Last Name'>
+					<button class="btn color blue" action="submit">Save</button>
+					<div class='section'></div>
+			</form>
+		</fieldset>
+		<fieldset class="col s3 offset-s1">
+			<legend>Change Password</legend>
+			<form action="/profilepass/{{ session['logged_user']['id'] }}" method="POST">	
+				<label>Password:</label>
+					<input type="password" name="password" placeholder='Password'>
+				<label>Password Confirmation:</label>
+					<input type="password" name="confirm" placeholder='Confirm Password'>
+				<button class="btn color blue" action="submit">Update Password</button>
+				<div class="section"></div>
+			</form>
+		</fieldset>
+	</div>
+	<div class="container row">
+		<fieldset class="col s7">
+			<form action="/profiledesc/{{ session['logged_user']['id']}}" method="POST">
+				<legend>Edit Description</legend>
+				<div class="input-field col s12">
+				<textarea class="materialize-textarea" name="description"></textarea>
+				</div>
+				<button class="btn black" action="submit">Save</button>
+				<div class='section'></div>
+			</form>
+		</fieldset>
+	</div>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+  <title>Parallax Template - Materialize</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="/static/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="/static/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+  <nav class="white" role="navigation">
+	<div class="nav-wrapper container">
+	  <a id="logo-container" href="/viewusers" class="brand-logo">Northwest Dojo</a>
+	  <ul class="right hide-on-med-and-down">
+		<li><a href="/viewusers">Dashboard</a></li>
+	  	<li><a href="/profile/session['logged_user']['id']">Edit Profile</a></li>
+		<li><a href="/signout">Sign Out</a></li>
+	  </ul>
+
+	  <ul id="nav-mobile" class="side-nav">
+		<li><a href="#">Navbar Link</a></li>
+	  </ul>
+	  <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+	</div>
+  </nav>
+<!-- {{ session['logged_user'] }} -->
+ <div class="container section"><!-- 
+ 	<h4>{{ session['logged_user']['first_name'] }} {{ session['logged_user']['last_name'] }}</h4>
+ 	<p>Registered on: {{ session['logged_user']['created_at'] }}</p>
+ 	<p>User ID: {{ session['logged_user']['id'] }}</p>
+ 	<p>Email Address: {{ session['logged_user']['email'] }}</p>
+ 	<p>Description: {{ session['logged_user']['description'] }}</p> -->
+ 	<h4>{{ user['first_name'] }} {{ user['last_name'] }}</h4>
+ 	<p>Registered on: {{ user['created_at'] }}</p>
+ 	<p>User ID: {{ user['id'] }}</p>
+ 	<p>Email Address: {{ user['email'] }}</p>
+ 	<p>Description: {{user['description']}}</p>
+ </div>
+
+ <div class="container section row">
+ 	<h5>Leave a message for {{ user['first_name'] }}</h5>
+	 	<form action="/sendmessage/{{ user['id'] }}" method="POST">
+			<div class="input-field col s12">
+				<textarea class="materialize-textarea" name="message"></textarea>
+			</div>
+			 <input type="hidden" name="author" value="{{ session['logged_user']['id']}}">
+			<button class="btn green right" action="submit">Send</button>
+	 	</form>
+ </div>
+
+ <div class="container section row">
+ 	{% for message in messages %}
+ 	<div class="col s12">
+ 		<p>{{ message['first_name'] }} messaged:</p>
+		<p>{{ message['message'] }}</p>
+	</div>
+	{% for comment in comments %}
+	{% if comment['c_m_id'] == message['m_id'] %}
+	<div class="col s11 offset-s1">
+		<p>{{ comment['first_name'] }} commented:</p>
+		<p>{{ comment['comment'] }} <p>
+	</div>
+	{% endif %}
+	{% endfor %}
+
+	<div class="input-field col s10 offset-s2">
+		<div class="section">
+		</div>
+		<label>Add your comment:</label>
+			<form action="/sendcomment/{{ message['m_id'] }}" method="POST">
+				<textarea class="materialize-textarea" name="comment"></textarea>
+				<input type="hidden" name="author" value="{{ session['logged_user']['id'] }}">
+				<input type="hidden" name="userid" value="{{user['id']}}">
+			<button class="btn green right" action="submit">Post</button>
+		</form>
+	</div>
+	{% endfor %}
+
+ </div>
+

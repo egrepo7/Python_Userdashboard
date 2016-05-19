@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+  <title>Parallax Template - Materialize</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="/static/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="/static/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+  <nav class="white" role="navigation">
+    <div class="nav-wrapper container">
+      <a id="logo-container" href="/" class="brand-logo">Northwest Dojo</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="#">Sign in</a></li>
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">
+        <li><a href="#">Navbar Link</a></li>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+
+  <div class="container row" id="signin_form">
+    <h5>Sign In</h5>
+    {% with errors = get_flashed_messages() %}
+    <br>
+    <form action="/signinuser" method="POST" class="col s3">
+        <label>Email:</label>
+            <input type="text" name="log_email">
+            {% if errors[0] %}
+            <p>{{ errors[0]['log_email'] }}</p>
+            {% endif %}
+        <label>Password:</label>   
+            <input type="password" name="log_password">
+            {% if errors[0] %}
+            <p>{{ errors[0]['log_password'] }}</p>
+            {% endif %}
+            {% if errors[0] %}
+            <p>{{ errors[0]['notreg'] }}</p>
+            {% endif %}
+            {% if errors[0] %}
+            <p>{{ errors[0]['passmatch'] }}</p>
+            {% endif %}
+
+        <button class="btn waves-effect waves-light" action="submit">Submit</button>  
+        <br>
+        <br>
+      <a href="/registerpage">Don't have an account? Register up here!</a>
+    </form>
+    {% endwith %}
+  </div>
+    
+
+ <script src="/static/js/jquery-2.2.3.js"></script>
+  <script src="/static/js/materialize.js"></script>
+  <script src="/static/js/init.js"></script>
+
+  </body>
+</html>

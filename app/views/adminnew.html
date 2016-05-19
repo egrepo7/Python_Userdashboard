@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+  <title>Parallax Template - Materialize</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="/static/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="/static/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+  <nav class="white" role="navigation">
+	<div class="nav-wrapper container">
+	  <a id="logo-container" href="#" class="brand-logo">Northwest Dojo</a>
+	  <ul class="right hide-on-med-and-down">
+		<li><a href="/signout">Sign Out</a></li>
+	  </ul>
+
+	  <ul id="nav-mobile" class="side-nav">
+		<li><a href="#">Navbar Link</a></li>
+	  </ul>
+	  <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+	</div>
+  </nav>
+
+  <div class="container row" id="signin_form">
+	<h5>Add New User</h5>
+	<br>
+	<form action="/adminreg" method="POST" class="col s3">
+		{% with errors = get_flashed_messages() %}
+		<label>Email Address:</label>
+			<input type="text" name="reg_email">
+			{% if errors[0] %}
+			<p>{{ errors[0]['email'] }}</p>
+			{% endif %}
+		<label>First Name:</label>   
+			<input type="text" name="reg_fname">
+			{% if errors[0] %}
+			<p>{{ errors[0]['fname'] }}</p>
+			{% endif %}
+		<label>Last Name:</label>   
+			<input type="text" name="reg_lname">
+			{% if errors[0] %}
+			<p>{{ errors[0]['lname'] }}</p>
+			{% endif %}
+		<label>Password:</label>   
+			<input type="password" name="reg_password">
+			{% if errors[0] %}
+			<p>{{ errors[0]['password'] }}</p>
+			{% endif %}
+		<label>Password Confirmation:</label>   
+			<input type="password" name="reg_confirm">    
+			{% if errors[0] %}
+			<p>{{ errors[0]['confirm_password'] }}</p>
+			{% endif %}
+		<label>User Level:</label>
+			<div class="input-field">
+				<select name="user_level" class="browser-default">
+					<option name="admin">Admin</option>
+					<option name="normal">Normal</option>
+				</select>
+			</div>
+			<div class="section"></div>
+	  <button class="btn waves-effect waves-light" action="submit">Create</button>   
+	</form>
+	{% endwith %}
+
+  </div>
+	
+
+ <script src="/static/js/jquery-2.2.3.js"></script>
+  <script src="/static/js/materialize.js"></script>
+  <script src="/static/js/init.js"></script>
+
+  </body>
+</html>
